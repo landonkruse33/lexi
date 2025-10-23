@@ -2,7 +2,7 @@
   "name": "Lexi",
   "description": "The AI word predictor",
   "version": "1.0",
-  "manifest_version": "3".
+  "manifest_version": "3"
   "action": {
     "default_popup": "customize.html",
     "default_icon": "lexi_icon.png"
