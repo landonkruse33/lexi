@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lexi</title>
+    <title>Lexi Settings</title>
     <style>
         body { font-family: Arial, sans-serif; }
-        #predictedWord { opacity: 0.7; }
+        label { display: block; margin: 10px 0; }
     </style>
 </head>
 <body>
-    <h1>Lexi</h1>
-    <label for="key">Customize Auto-Populate Key:</label>
+    <h1>Lexi Settings</h1>
+    <label for="key">Auto-populate Key:</label>
     <input type="text" id="key" value="TAB" />
-    <button id="saveKey">Save Key</button>
-    <div id="predictedWord"></div>
+    <button id="save">Save</button>
     <script src="popup.js"></script>
 </body>
 </html>
