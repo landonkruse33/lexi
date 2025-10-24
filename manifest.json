@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Trigram Text Predictor",
+  "name": "Lexi",
   "version": "1.0",
-  "description": "A Chrome extension that predicts the next word based on user input.",
+  "description": "A text prediction Chrome extension.",
   "permissions": ["storage", "activeTab"],
   "background": {
     "service_worker": "background.js"
@@ -21,5 +21,11 @@
       "matches": ["<all_urls>"],
       "js": ["content.js"]
     }
-  ]
+  ],
+  "icons": {
+      "16": "lexi-icon-16.png",
+      "32": "lexi-icon-32.png",
+      "48": "lexi-icon-48.png",
+      "128": "lexi-icon-128.png"
+  }
 }
