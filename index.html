@@ -1,9 +1,17 @@
+# Trigram Text Prediction Model
+
+## Requirement Summary
+The objective of this project is to create an HTML file that features an input field for users to enter training data. This data will be utilized to construct a trigram text prediction model. Additionally, there will be a second input field where users can type a word, and the application will provide a prediction for the subsequent word based on the entered data. The page will also include a custom icon.
+
+## Code Generated
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trigram Text Prediction</title>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAFWUExURer+/en9/Oz+/en+/ev+/eb9/Mbx787y8I7T0FO0r1S0r4/X1M729Nr39aDa1129uSuxqxOrpROknS2jnV66tqDi39v6+ef9/JDQzTu8tzO/uUS/uUW7tUW2sVKvq0SknzyppJDa1+f+/eP7+YrKx2XEwGvKxkzLxUrIwkvEvli6tkKuqSioon7OyuT9/OT7+oC/vDKCfzminkXIwzbOyDXIwjjCu12/unS7t43U0eP8+4G+vDOEgUqSj2Skolizr1jAu1u6tUirpiWVj3zJxeP6+YrEwWWlom2rqE+Wk0ihnUq9uFi0sECmoR6clnvIxeT9++f8+5DIxTmKhjCCf0GNikGNiUKVkVG2skOuqT2qpZDU0dr19KDT0FykoSd9eg5rZw5taSugm168uKDb2Nr4987v7Y7IxVKemlKfm47LyM7x7+v+/ub8+8br6en+/Oz+/v///w9P5pAAAAABYktHRHGvB1ziAAAAB3RJTUUH6QoYCykrxi0OcQAAALJJREFUGNNjYMAKGBmYmIAEDDAzsLCysbGyABkQaRYGdg5OLm4eBhZGiDwvH7+AoJCwiKgYRI24hKSUtIysnLyCohJYi7KKqpq6hqaWto6uHlhA38DQyNjE1MzcwtIKImBtY2tn7+Do5OwCUeHq5u7h6eXt4+vnHwAWCAwKDgkNC4+IjIoWh1gbExsXn5CYlJySCrEW6LC09IzMrGyow0A+ycnNy8tlYchH8lxBAZLnUAAA8+catEldqIIAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjUtMTAtMjRUMTE6NDE6NDMrMDA6MDCIX0IcAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDI1LTEwLTI0VDExOjQxOjQzKzAwOjAw+QL6oAAAACh0RVh0ZGF0ZTp0aW1lc3RhbXAAMjAyNS0xMC0yNFQxMTo0MTo0MyswMDowMK4X238AAAAASUVORK5CYII=">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,43 +36,32 @@
     <h1>Trigram Text Prediction Model</h1>
     <label for="trainingData">Enter Training Data:</label><br>
     <input type="text" id="trainingData" placeholder="Type your training data here..."><br>
-    <button onclick="buildModel()">Build Model</button>
-
-    <label for="inputWord">Type a word to predict the next one:</label><br>
-    <input type="text" id="inputWord" placeholder="Type a word here..." oninput="predictWord()"><br>
+    
+    <label for="inputWord">Type a word for prediction:</label><br>
+    <input type="text" id="inputWord" placeholder="Type a word..."><br>
+    <button onclick="predictWord()">Predict Next Word</button>
+    
     <div id="prediction"></div>
 
     <script>
-        let trigrams = {};
+        let trainingData = [];
 
-        function buildModel() {
-            const trainingData = document.getElementById('trainingData').value;
-            const words = trainingData.split(' ');
-            for (let i = 0; i < words.length - 2; i++) {
-                const key = words[i] + ' ' + words[i + 1];
-                const value = words[i + 2];
-                if (!trigrams[key]) {
-                    trigrams[key] = [];
-                }
-                trigrams[key].push(value);
-            }
-            alert('Model built successfully!');
-        }
+        document.getElementById('trainingData').addEventListener('input', function() {
+            trainingData = this.value.split(' ');
+        });
 
         function predictWord() {
-            const input = document.getElementById('inputWord').value;
-            const words = input.split(' ');
-            if (words.length < 2) {
-                document.getElementById('prediction').innerText = '';
-                return;
+            const inputWord = document.getElementById('inputWord').value;
+            const prediction = getNextWord(inputWord);
+            document.getElementById('prediction').innerText = prediction ? `Predicted next word: ${prediction}` : 'No prediction available.';
+        }
+
+        function getNextWord(word) {
+            const index = trainingData.indexOf(word);
+            if (index !== -1 && index < trainingData.length - 1) {
+                return trainingData[index + 1];
             }
-            const key = words[words.length - 2] + ' ' + words[words.length - 1];
-            const predictions = trigrams[key];
-            if (predictions && predictions.length > 0) {
-                document.getElementById('prediction').innerText = 'Predicted next word: ' + predictions[Math.floor(Math.random() * predictions.length)];
-            } else {
-                document.getElementById('prediction').innerText = 'No prediction available.';
-            }
+            return null;
         }
     </script>
 </body>
